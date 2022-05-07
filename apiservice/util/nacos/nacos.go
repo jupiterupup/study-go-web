@@ -66,5 +66,5 @@ func GetConfIfPresent(key string) string {
 		panic(fmt.Errorf("viper failed to resolve configuration: %s \n", err))
 	}
 
-	return v.GetString(key)
+	return "root:zyh123@tcp(127.0.0.1:3306)/x_fire_press?charset=utf8mb4&parseTime=True&loc=Local"
 }

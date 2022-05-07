@@ -1,0 +1,2 @@
+dsn=root:zyh123@tcp(127.0.0.1:3306)/x_fire_press?charset=utf8mb4&parseTime=True&loc=Local
+dsn1=root:zyh123@tcp(127.0.0.1:3306)/x_fire_press?charset=utf8mb4&parseTime=True&loc=Local
