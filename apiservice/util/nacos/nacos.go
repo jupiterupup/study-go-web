@@ -13,13 +13,14 @@ import (
 )
 
 const (
-	ip       = "nacos.ip"
-	port     = "nacos.port"
-	username = "nacos.username"
-	password = "nacos.password"
-	appId    = "nacos.appId"
-	appVer   = "nacos.appVer"
-	appStage = "nacos.appStage"
+	ip         = "nacos.ip"
+	port       = "nacos.port"
+	username   = "nacos.username"
+	password   = "nacos.password"
+	appId      = "nacos.appId"
+	appVer     = "nacos.appVer"
+	appStage   = "nacos.appStage"
+	configType = "nacos.configType"
 )
 
 var client config_client.IConfigClient
@@ -39,6 +40,8 @@ func init() {
 				Username:    viperhelper.GetLocalConfIfPresent(username),
 				Password:    viperhelper.GetLocalConfIfPresent(password),
 				NamespaceId: viperhelper.GetLocalConfIfPresent(appStage),
+				CacheDir:    "./apiservice/util/nacos/cache",
+				LogDir:      "./apiservice/util/nacos/log",
 				TimeoutMs:   5000,
 			},
 			ServerConfigs: serverConfigs,
@@ -59,12 +62,11 @@ func GetConfIfPresent(key string) string {
 	if err != nil {
 		panic(fmt.Errorf("Fatal read naos: %s \n", err))
 	}
-	// TODO: 解析nacos的配置。注意配置改变是否同步生效？
 	v := viper.New()
+	v.SetConfigType(viperhelper.GetLocalConfIfPresent(configType))
 	err = v.ReadConfig(strings.NewReader(content))
 	if err != nil {
 		panic(fmt.Errorf("viper failed to resolve configuration: %s \n", err))
 	}
-
-	return "root:zyh123@tcp(127.0.0.1:3306)/x_fire_press?charset=utf8mb4&parseTime=True&loc=Local"
+	return v.Get(key).(string)
 }
