@@ -1,0 +1,12 @@
+server:
+   port: 8080
+   
+nacos:
+  appId: fire-press.properties
+  appStage: develop
+  appVer: 1.0.0
+  ip: 139.9.50.212
+  port: 8848
+  username: reader
+  password: Nacos@yf2021read
+
